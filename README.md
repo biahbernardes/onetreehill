@@ -6,7 +6,7 @@ Plataforma interativa para fãs acompanharem seu progresso na série, participar
 
 ## 📋 Objetivo do Projeto
 
-Desenvolver uma plataforma interativa e personalizada para fãs da série One Tree Hill, permitindo o acompanhamento do progresso da visualização, visualização de métricas personalizadas e participação em desafios gamificados. O projeto visa enriquecer a experiência de quem, assim como eu, é apaixonado pela série e teve sua vida impactada por ela.
+Desenvolver uma plataforma interativa e personalizada para fãs da série One Tree Hill, permitindo o acompanhamento do progresso da visualização, visualização de métricas personalizadas e participação em desafios. O projeto visa enriquecer a experiência de quem, assim como eu, é apaixonado pela série e teve sua vida impactada por ela.
 
 ### Funcionalidades
 
