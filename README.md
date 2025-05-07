@@ -17,7 +17,7 @@ Desenvolver uma plataforma interativa e personalizada para fãs da série One Tr
 ### Software
 
 - **Site:** HTML, CSS e JavaSript;
-- **Backend:**Web-data-viz;
+- **Backend:** Web-data-viz;
 - **Armazenamento de Dados:** MySQL;
 - **Ferramentas de Design:** Canva;
 - **IDE:** Visual Studio Code;
