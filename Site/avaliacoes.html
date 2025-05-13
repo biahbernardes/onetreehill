@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minhas Avaliações | One Tree Hill</title>
+  <link rel="stylesheet" href="./style/avaliacoes.css" />
+</head>
+<body>
+  <div class="container-pai">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="./Imgs/account.png" alt="Perfil" />
+        <h1>Olá, [Usuário]!</h1>
+      </div>
+      <a href="./dashboard.html">Visão Geral</a>
+      <a href="./episodios.html">Episódios & Temporadas</a>
+      <a href="./avaliacoes.html">Minhas Avaliações</a>
+      <a href="./login.html" class="logout-btn">
+        Sair
+        <img src="./Imgs/logout.png" alt="Logout" class="logout-icon" />
+      </a>
+    </div>
+
+    <div class="main">
+      <h2>Minhas Avaliações</h2>
+      <div id="avaliacoes-container" class="episodios-container"></div>
+    </div>
+  </div>
+
+  <script>
+    // Simulação de dados salvos no localStorage (poderia vir do backend)
+    const avaliacoesSalvas = JSON.parse(localStorage.getItem("avaliacoes")) || [];
+
+    function mostrarAvaliacoes() {
+      const container = document.getElementById("avaliacoes-container");
+      container.innerHTML = "";
+
+      if (avaliacoesSalvas.length === 0) {
+        container.innerHTML = "<p>Você ainda não avaliou nenhum episódio.</p>";
+        return;
+      }
+
+      avaliacoesSalvas.forEach(av => {
+        const card = document.createElement("div");
+        card.className = "episodio-card";
+        card.innerHTML = `
+          <img src="${av.img}" alt="${av.titulo}" class="episodio-img"/>
+          <h3>${av.numero}. ${av.titulo}</h3>
+          <p>Status: ${av.assistido ? "Assistido" : ""} ${av.reassistido ? " / Reassistido" : ""}</p>
+          <p>Avaliação: ${"⭐".repeat(av.avaliacao)}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    mostrarAvaliacoes();
+  </script>
+</body>
+</html>

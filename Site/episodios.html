@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Episódios | One Tree Hill</title>
+    <link rel="stylesheet" href="./style/episodios.css" />
+  </head>
+
+  <body>
+    <div class="container-pai">
+      <div class="sidebar">
+        <div class="profile">
+          <img src="./assets/account.png" alt="Perfil" />
+          <h1>Olá, Bia!</h1>
+        </div>
+
+        <a href="./dashboard.html">Visão Geral</a>
+        <a href="./episodios.html">Episódios & Temporadas</a>
+        <a href="./avaliacoes.html">Minhas Avaliações</a>
+
+        <a href="./login.html" class="logout-btn">
+          Sair
+          <img src="./assets/botao -sair.png" alt="Logout" class="logout-icon" />
+        </a>
+      </div>
+
+      <div class="main">
+        <div class="temporada-select">
+          <label for="temporada">Escolha a Temporada:</label>
+          <select id="ipt_temporada" onchange="carregarEpisodios()">
+            <option value="1">Temporada 1</option>
+            <option value="2">Temporada 2</option>
+            <option value="3">Temporada 3</option>
+            <option value="4">Temporada 4</option>
+            <option value="5">Temporada 5</option>
+            <option value="6">Temporada 6</option>
+            <option value="7">Temporada 7</option>
+            <option value="8">Temporada 8</option>
+            <option value="9">Temporada 9</option>
+          </select>
+        </div>
+
+        <div id="div_episodioscontainer" class="episodios-container"></div>
+      </div>
+    </div>
+
+    <script>
+      const episodiosPorTemporada = {
+        1: [
+          { titulo: "Pilot", img: "./assets/piloto.jpg", numero: 1 },
+          { titulo: "The Places You Have Come to Fear the Most", img: "./Imgs/ep2.jpg", numero: 2 },
+          { titulo: "Are You True?", img: "./Imgs/ep3.jpg", numero: 3 },
+
+        ],
+        2: [
+          { titulo: "Episódio 1", img: "./assets/piloto.jpg", numero: 1 },
+          { titulo: "Episódio 2", img: "./Imgs/ep-placeholder.jpg", numero: 2 },
+        
+        ],
+        
+      };
+
+      function carregarEpisodios() {
+        const temporada = ipt_temporada.value;
+        const container = div_episodioscontainer;
+        container.innerHTML = "";
+
+        const episodios = episodiosPorTemporada[temporada] || [];
+
+        episodios.forEach((ep) => {
+          const card = document.createElement("div");
+          card.className = "episodio-card";
+          card.innerHTML = `
+            <img src="${ep.img}" alt="${ep.titulo}" class="episodio-img"/>
+            <h3>${ep.numero}. ${ep.titulo}</h3>
+            <div class="checkbox-group">
+              <label><input type="checkbox"> Já assisti</label>
+              <label><input type="checkbox"> Reassistido</label>
+            </div>
+            <div class="avaliacao">
+              Avaliação:
+              <select>
+                <option value="0">0⭐</option>
+                <option value="1">1⭐</option>
+                <option value="2">2⭐</option>
+                <option value="3">3⭐</option>
+                <option value="4">4⭐</option>
+                <option value="5">5⭐</option>
+              </select>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      window.onload = carregarEpisodios;
+    </script>
+  </body>
+</html>
