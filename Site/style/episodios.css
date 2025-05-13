@@ -1,4 +1,4 @@
-/* style2.css */
+
 
 * {
   margin: 0;
@@ -21,7 +21,7 @@ body {
 
 .sidebar {
   width: 250px;
-  background-color: #5e4431;
+  background-color: #d7a8e2;
   color: #fff;
   padding: 30px 20px;
   display: flex;
@@ -48,13 +48,13 @@ body {
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
-  background-color: #6d4c3d;
+  background-color: #633657;
   border-radius: 10px;
   transition: background 0.3s;
 }
 
 .sidebar a:hover {
-  background-color: #a67c52;
+  background-color: #84b5d6;
 }
 
 .logout-btn {
