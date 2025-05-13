@@ -1,5 +1,3 @@
-/* style2.css */
-
 * {
   margin: 0;
   padding: 0;
@@ -20,8 +18,12 @@ body {
 }
 
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 250px;
-  background-color: #5e4431;
+  height: 100vh;
+  background-color: #32003d;
   color: #fff;
   padding: 30px 20px;
   display: flex;
@@ -48,13 +50,13 @@ body {
   text-decoration: none;
   font-weight: bold;
   padding: 10px 15px;
-  background-color: #6d4c3d;
+  background-color: #633657;
   border-radius: 10px;
   transition: background 0.3s;
 }
 
 .sidebar a:hover {
-  background-color: #a67c52;
+  background-color: #84b5d6;
 }
 
 .logout-btn {
@@ -68,19 +70,58 @@ body {
 }
 
 .main {
+  margin-left: 250px;
   flex: 1;
   padding: 30px;
   background-color: #fefcf9;
 }
 
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
+.main h2 {
+  margin-bottom: 25px;
+  font-size: 26px;
+  color: #32003d;
+}
+
+.avaliacoes-metricas {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.metrica-card {
+  background-color: #fff;
+  border: 1px solid #d2c5b5;
+  border-radius: 12px;
+  padding: 25px 20px;
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.metrica-card:hover {
+  transform: translateY(-5px);
+  background-color: #f5f0eb;
+}
+
+.metrica-card h3 {
+  font-size: 17px;
+  color: #633657;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.metrica-card p {
+  font-size: 26px;
+  font-weight: bold;
+  color: #2c1e1e;
 }
 
 .episodios-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
 }
 
@@ -88,7 +129,7 @@ h2 {
   background-color: #fff;
   border: 1px solid #d2c5b5;
   border-radius: 15px;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
   padding: 15px;
   text-align: center;
   transition: transform 0.3s ease;
@@ -109,4 +150,36 @@ h2 {
 .episodio-card h3 {
   margin-bottom: 10px;
   font-size: 16px;
+}
+
+.episodio-card p {
+  font-size: 14px;
+  color: #444;
+  margin: 5px 0;
+}
+.graficos-metricas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.grafico {
+  flex: 1 1 400px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #d2c5b5;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.grafico h4 {
+  font-size: 17px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+canvas {
+  width: 100% !important;
+  max-height: 300px;
 }

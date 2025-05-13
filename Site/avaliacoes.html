@@ -5,56 +5,125 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minhas Avaliações | One Tree Hill</title>
   <link rel="stylesheet" href="./style/avaliacoes.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container-pai">
     <div class="sidebar">
       <div class="profile">
-        <img src="./Imgs/account.png" alt="Perfil" />
-        <h1>Olá, [Usuário]!</h1>
+        <img src="./assets/account.png" alt="Perfil" />
+        <h1>Olá, Bia!</h1>
       </div>
       <a href="./dashboard.html">Visão Geral</a>
-      <a href="./episodios.html">Episódios & Temporadas</a>
+      <a href="./episodios.html">Temporadas e Episódios</a>
       <a href="./avaliacoes.html">Minhas Avaliações</a>
-      <a href="./login.html" class="logout-btn">
+      <a href="./index.html" class="logout-btn">
         Sair
-        <img src="./Imgs/logout.png" alt="Logout" class="logout-icon" />
+        <img src="./assets/botao -sair.png" alt="Logout" class="logout-icon" />
       </a>
     </div>
 
     <div class="main">
       <h2>Minhas Avaliações</h2>
+
       <div id="avaliacoes-container" class="episodios-container"></div>
+
+      <h3 style="margin-top: 50px;">📊 Visão Geral das Temporadas</h3>
+      <div class="graficos-metricas">
+        <div class="grafico">
+          <h4> Episódios Assistidos por Temporada</h4>
+          <canvas id="graficoBarras"></canvas>
+        </div>
+        <div class="grafico">
+          <h4> Temporadas Mais Avaliadas</h4>
+          <canvas id="graficoPizza"></canvas>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    // Simulação de dados salvos no localStorage (poderia vir do backend)
-    const avaliacoesSalvas = JSON.parse(localStorage.getItem("avaliacoes")) || [];
+    const avaliacoesExemplo = [
+      { temporada: "1", assistido: true, avaliacao: 4 },
+      { temporada: "1", assistido: true, avaliacao: 5 },
+      { temporada: "1", assistido: true, avaliacao: 4 },
+      { temporada: "2", assistido: true, avaliacao: 5 },
+      { temporada: "2", assistido: false, avaliacao: 0 },
+      { temporada: "3", assistido: true, avaliacao: 3 },
+      { temporada: "3", assistido: true, avaliacao: 4 },
+      { temporada: "3", assistido: true, avaliacao: 5 },
+      { temporada: "3", assistido: true, avaliacao: 0 },
+      { temporada: "4", assistido: true, avaliacao: 2 }
+    ];
+
 
     function mostrarAvaliacoes() {
       const container = document.getElementById("avaliacoes-container");
       container.innerHTML = "";
 
-      if (avaliacoesSalvas.length === 0) {
+      if (avaliacoesExemplo.length === 0) {
         container.innerHTML = "<p>Você ainda não avaliou nenhum episódio.</p>";
         return;
       }
 
-      avaliacoesSalvas.forEach(av => {
+      avaliacoesExemplo.forEach((av, i) => {
         const card = document.createElement("div");
         card.className = "episodio-card";
         card.innerHTML = `
-          <img src="${av.img}" alt="${av.titulo}" class="episodio-img"/>
-          <h3>${av.numero}. ${av.titulo}</h3>
-          <p>Status: ${av.assistido ? "Assistido" : ""} ${av.reassistido ? " / Reassistido" : ""}</p>
-          <p>Avaliação: ${"⭐".repeat(av.avaliacao)}</p>
+          <img src="./Imgs/capa${i % 3 + 1}.jpg" alt="Episódio" class="episodio-img" />
+          <h3>Episódio ${i + 1}</h3>
+          <p>Temporada: ${av.temporada}</p>
+          <p>Status: ${av.assistido ? "Assistido" : "Não assistido"}</p>
+          <p>Avaliação: ${av.avaliacao > 0 ? "⭐".repeat(av.avaliacao) : "—"}</p>
         `;
         container.appendChild(card);
       });
     }
 
+    function gerarGraficos() {
+      const temporadas = ["1", "2", "3", "4"];
+      const assistidos = [3, 1, 4, 1];
+      const maisAvaliadas = [3, 1, 3, 1];
+
+      new Chart(document.getElementById("graficoBarras"), {
+        type: "bar",
+        data: {
+          labels: temporadas,
+          datasets: [{
+            label: "Episódios Assistidos",
+            data: assistidos,
+            backgroundColor: "#32003d"
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 1 }
+            }
+          }
+        }
+      });
+
+      new Chart(document.getElementById("graficoPizza"), {
+        type: "pie",
+        data: {
+          labels: temporadas,
+          datasets: [{
+            label: "Temporadas Avaliadas",
+            data: maisAvaliadas,
+            backgroundColor: ["#633657", "#84b5d6", "#aaa", "#ffcdd2"]
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    }
+
     mostrarAvaliacoes();
+    gerarGraficos();
   </script>
 </body>
 </html>
