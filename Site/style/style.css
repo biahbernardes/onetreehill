@@ -169,7 +169,14 @@ body {
   margin: 0 0 40px 0; /* elimina espaços verticais excessivos */
   font-family: 'Montserrat', sans-serif;
   }
-  
+
+.titulo-trilha {
+    font-size: 24px;
+  color: black;
+  text-align: center;
+  margin: 0 0 20px 0; /* elimina espaços verticais excessivos */
+  font-family: 'Montserrat', sans-serif;
+  }
 .boxes {
     width: 100%;
     display: flex;
