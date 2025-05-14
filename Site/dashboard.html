@@ -66,18 +66,6 @@
         return;
       }
 
-      avaliacoesExemplo.forEach((av, i) => {
-        const card = document.createElement("div");
-        card.className = "episodio-card";
-        card.innerHTML = `
-          <img src="./assets/episodios/temp1ep1${i % 3 + 1}.jpg" alt="Episódio" class="episodio-img" />
-          <h3>Episódio ${i + 1}</h3>
-          <p>Temporada: ${av.temporada}</p>
-          <p>Status: ${av.assistido ? "Assistido" : "Não assistido"}</p>
-          <p>Avaliação: ${av.avaliacao > 0 ? "⭐".repeat(av.avaliacao) : "—"}</p>
-        `;
-        container.appendChild(card);
-      });
     }
 
     function gerarGraficos() {
