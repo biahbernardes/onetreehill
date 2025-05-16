@@ -26,7 +26,7 @@
     <div class="main">
       <h2>Minhas Avaliações</h2>
 
-      <div id="avaliacoes-container" class="episodios-container"></div>
+      <div id="avaliacoes_container" class="episodios-container"></div>
 
     </div>
 
@@ -46,7 +46,7 @@
 
 
     function mostrarAvaliacoes() {
-      const container = document.getElementById("avaliacoes-container");
+      const container = document.getElementById("avaliacoes_container");
       container.innerHTML = "";
 
       if (avaliacoesExemplo.length === 0) {
@@ -54,15 +54,15 @@
         return;
       }
 
-      avaliacoesExemplo.forEach((av, i) => {
+      avaliacoesExemplo.forEach((avaliacao, i) => {
         const card = document.createElement("div");
         card.className = "episodio-card";
         card.innerHTML = `
           <img src="./assets/episodios/temp1ep1${i % 3 + 1}.jpg" alt="Episódio" class="episodio-img" />
           <h3>Episódio ${i + 1}</h3>
-          <p>Temporada: ${av.temporada}</p>
-          <p>Status: ${av.assistido ? "Assistido" : "Não assistido"}</p>
-          <p>Avaliação: ${av.avaliacao > 0 ? "⭐".repeat(av.avaliacao) : "—"}</p>
+          <p>Temporada: ${avaliacao.temporada}</p>
+          <p>Status: ${avaliacao.assistido ? "Assistido" : "Não assistido"}</p>
+          <p>Avaliação: ${avaliacao.avaliacao > 0 ? "⭐".repeat(avaliacao.avaliacao) : "—"}</p>
         `;
         container.appendChild(card);
       });
