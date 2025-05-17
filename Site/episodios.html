@@ -278,37 +278,40 @@
       };
 
       function carregarEpisodios() {
-        const temporada = ipt_temporada.value;
-        const container = div_episodioscontainer;
-        container.innerHTML = "";
+  var temporadaSelecionada = ipt_temporada.value;
+  var episodios = episodiosPorTemporada[temporadaSelecionada] || [];
 
-        const episodios = episodiosPorTemporada[temporada] || [];
+  var final = "";
 
-        episodios.forEach((ep) => {
-          const card = document.createElement("div");
-          card.className = "episodio-card";
-          card.innerHTML = `
-            <img src="${ep.img}" alt="${ep.titulo}" class="episodio-img"/>
-            <h3>${ep.numero}. ${ep.titulo}</h3>
-            <div class="checkbox-group">
-              <label><input type="checkbox"> Já assisti</label>
-              <label><input type="checkbox"> Reassistido</label>
-            </div>
-            <div class="avaliacao">
-              Avaliação:
-              <select>
-                <option value="0">0⭐</option>
-                <option value="1">1⭐</option>
-                <option value="2">2⭐</option>
-                <option value="3">3⭐</option>
-                <option value="4">4⭐</option>
-                <option value="5">5⭐</option>
-              </select>
-            </div>
-          `;
-          container.appendChild(card);
-        });
-      }
+  for (var i = 0; i < episodios.length; i++) {
+    var ep = episodios[i];
+
+    final +=
+      '<div class="episodio-card">' +
+        '<img src="' + ep.img + '" alt="' + ep.titulo + '" class="episodio-img"/>' +
+        '<h3>' + ep.numero + '. ' + ep.titulo + '</h3>' +
+        '<div class="checkbox-group">' +
+          '<label><input type="checkbox"> Já assisti</label>' +
+          '<label><input type="checkbox"> Reassistido</label>' +
+        '</div>' +
+        '<div class="avaliacao">' +
+          'Avaliação: ' +
+          '<select>' +
+            '<option value="0">0⭐</option>' +
+            '<option value="1">1⭐</option>' +
+            '<option value="2">2⭐</option>' +
+            '<option value="3">3⭐</option>' +
+            '<option value="4">4⭐</option>' +
+            '<option value="5">5⭐</option>' +
+          '</select>' +
+        '</div>' +
+      '</div>';
+  }
+
+  div_episodioscontainer.innerHTML = final;
+   window.onload = carregarEpisodios;
+}
+
 
       window.onload = carregarEpisodios;
     </script>

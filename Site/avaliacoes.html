@@ -26,49 +26,59 @@
     <div class="main">
       <h2>Minhas Avaliações</h2>
 
-      <div id="avaliacoes_container" class="episodios-container"></div>
+      <div id="div_avaliacoes" class="episodios-container"></div>
 
     </div>
-
   <script>
-    const avaliacoesExemplo = [
-      { temporada: "1", assistido: true, avaliacao: 4 },
-      { temporada: "1", assistido: true, avaliacao: 5 },
-      { temporada: "1", assistido: true, avaliacao: 4 },
-      { temporada: "2", assistido: true, avaliacao: 5 },
-      { temporada: "2", assistido: false, avaliacao: 0 },
-      { temporada: "3", assistido: true, avaliacao: 3 },
-      { temporada: "3", assistido: true, avaliacao: 4 },
-      { temporada: "3", assistido: true, avaliacao: 5 },
-      { temporada: "3", assistido: true, avaliacao: 0 },
-      { temporada: "4", assistido: true, avaliacao: 2 }
+    var avaliacoes = [
+      { temp: "1", ep: "1", status: "Assistido", nota: 4, img: "temp1ep11.jpg" },
+      { temp: "1", ep: "2", status: "Assistido", nota: 5, img: "temp1ep12.jpg" },
+      { temp: "1", ep: "3", status: "Assistido", nota: 4, img: "temp1ep13.jpg" },
+      { temp: "2", ep: "1", status: "Assistido", nota: 5, img: "temp2ep11.jpg" },
+      { temp: "2", ep: "2", status: "Não assistido", nota: 0, img: "temp2ep12.jpg" },
+      { temp: "3", ep: "1", status: "Assistido", nota: 3, img: "temp3ep11.jpg" },
+      { temp: "3", ep: "2", status: "Assistido", nota: 4, img: "temp3ep12.jpg" },
+      { temp: "3", ep: "3", status: "Assistido", nota: 5, img: "temp3ep13.jpg" },
+      { temp: "3", ep: "4", status: "Assistido", nota: 0, img: "temp3ep14.jpg" },
+      { temp: "4", ep: "1", status: "Assistido", nota: 2, img: "temp4ep11.jpg" }
     ];
 
-
-    function mostrarAvaliacoes() {
-      const container = document.getElementById("avaliacoes_container");
-      container.innerHTML = "";
-
-      if (avaliacoesExemplo.length === 0) {
-        container.innerHTML = "<p>Você ainda não avaliou nenhum episódio.</p>";
-        return;
+    function card(a, i) {
+      var estrelas = "";
+      var j = 0;
+      while (j < a.nota) {
+        estrelas += "⭐";
+        j++;
+      }
+      if (estrelas === "") {
+        estrelas = "—";
       }
 
-      avaliacoesExemplo.forEach((avaliacao, i) => {
-        const card = document.createElement("div");
-        card.className = "episodio-card";
-        card.innerHTML = `
-          <img src="./assets/episodios/temp1ep1${i % 3 + 1}.jpg" alt="Episódio" class="episodio-img" />
-          <h3>Episódio ${i + 1}</h3>
-          <p>Temporada: ${avaliacao.temporada}</p>
-          <p>Status: ${avaliacao.assistido ? "Assistido" : "Não assistido"}</p>
-          <p>Avaliação: ${avaliacao.avaliacao > 0 ? "⭐".repeat(avaliacao.avaliacao) : "—"}</p>
-        `;
-        container.appendChild(card);
-      });
+      return (
+        `<div class="episodio-card">
+         <img src="./assets/episodios/${a.img}" class="episodio-img">
+         <h3>Episódio ${(i + 1)} </h3> 
+         <p>Temporada: ${a.temp} </p>
+         <p>Status: ${a.status} </p>
+         <p>Avaliação: ${estrelas} </p>
+         </div>`
+      );
     }
 
-    mostrarAvaliacoes();
+    function mostrarAvaliacoes() {
+      var final = ""; 
+
+      var i = 0;
+      while (i < avaliacoes.length) {
+        var a = avaliacoes[i];
+        final += card(a, i); 
+        i++;
+      }
+
+      div_avaliacoes.innerHTML = final;
+    }
+
+    mostrarAvaliacoes(); 
   </script>
 </body>
 </html>

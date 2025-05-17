@@ -1,11 +1,184 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - One Tree Hill </title>
-  <link rel="stylesheet" href="style.css" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AquaTech | Cadastro</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="./style/cadastro.css" />
+  <link rel="icon" href="./assets/icon/favicon2.ico" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
-<body>
+
+<body onload="listar()">
+  <div class="header">
+    <div class="container">
+      <ul class="navbar">
+
+        <h5 class="agora">
+          <a href="#">Sobre</a>
+        </h5>
+        <h5>
+          <a href="#personagens">Personagens</a>
+        </h5>
+        <h5>
+          <a href="#curiosidades">Curiosidades</a>
+        </h5>
+        <li><img src="./assets/logo.png"></li>
+        <h5>
+          <a href="#mapa">Cenários</a>
+        </h5>
+        <h5>
+          <a href="#trilha">Trilha sonora</a>
+        </h5>
+        <h5>
+          <a href="episodios.html">Login</a>
+        </h5>
+      </ul>
+    </div>
+  </div>
+
+  <!--header fim-->
+
+  <div class="login">
+     <div class="banner">
+    <div class="container">
+    <div class="alerta_erro">
+      <div class="card_erro" id="cardErro" style="display:none;">
+        <span id="mensagem_erro"></span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>Olá de volta!</h2>
+        <div class="formulario">
+          <div class="campo">
+            <span>E-mail:</span>
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+          </div>
+          <div class="campo">
+            <span>Senha:</span>
+            <input id="senha_input" type="password" placeholder="******" />
+          </div>
+          <button class="botao" onclick="cadastrar()">Cadastrar</button>
+        </div>
+
+        <div id="div_aguardar" class="loading-div" style="display:none;">
+          <img src="./assets/circle-loading.gif" id="loading-gif" />
+        </div>
+
+        <div id="div_erros_login"></div>
+      </div>
+    </div>
+  </div>
+   </div>
+  </div>
+
+ <div class="footer">
+    <div class="container">
+      <div class="footer-col">
+        <p>Desenvolvido por Beatriz</p>
+        <p class="sub-info">Rua Haddock Lobo, 595 - SP</p>
+        <p class="sub-info">
+          <a class="email-link" href="mailto:beatriz.dsilva@sptech.school">
+            beatriz.dsilva@sptech.school
+          </a>
+        </p>
+        <p class="sub-info">(11)96312-5694</p>
+      </div>
+  
+
+      <div class="footer-logo">
+        <a href="index.html#">
+          <img class="logo" src="./assets/sticker.png" alt="OTH" />
+        </a>
+      </div>
+  
+    <div class="footer-col">
+      <p>"Você só descobre quem realmente é, quando é testado.<br>
+        E você descobre quem pode ser, quando é testado.<br>
+        A pessoa que você quer ser, existe.<br>
+        No lado oposto de fé, crença e trabalho pesado." - One Tree Hill</p>
+    </div>
+  </div>
 </body>
 </html>
+
+<script>
+
+
+    function entrar() {
+        aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard/cards.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>
