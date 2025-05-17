@@ -26,7 +26,7 @@
     <div class="main">
       <h2>Minhas Avaliações</h2>
 
-      <div id="avaliacoes-container" class="episodios-container"></div>
+      <div id="div_avaliacoes" class="episodios-container"></div>
 
       <h3 style="margin-top: 50px;">📊 Visão Geral das Temporadas</h3>
       <div class="graficos-metricas">
@@ -58,11 +58,11 @@
 
 
     function mostrarAvaliacoes() {
-      const container = document.getElementById("avaliacoes-container");
-      container.innerHTML = "";
+      
+      div_avaliacoes.innerHTML = "";
 
       if (avaliacoesExemplo.length === 0) {
-        container.innerHTML = "<p>Você ainda não avaliou nenhum episódio.</p>";
+        div_avaliacoes.innerHTML = `<p>Você ainda não avaliou nenhum episódio.</p>`;
         return;
       }
 
