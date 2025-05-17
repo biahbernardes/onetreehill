@@ -5,58 +5,70 @@
 /*
 comandos para mysql server
 */
+create database onetreehill;
+use onetreehill;
 
-CREATE DATABASE aquatech;
-
-USE aquatech;
-
-CREATE TABLE empresa (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	razao_social VARCHAR(50),
-	cnpj CHAR(14),
-	codigo_ativacao VARCHAR(50)
+create table usuario (
+  idUsuario int primary key auto_increment,
+  nome varchar(45) not null,
+  email varchar(100) not null unique,
+  personagemFavorito varchar(100) not null,
+  senha varchar(100) not null
 );
 
-CREATE TABLE usuario (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50),
-	email VARCHAR(50),
-	senha VARCHAR(50),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+create table temporada (
+  idTemporada int primary key auto_increment,
+  numero int not null
 );
 
-CREATE TABLE aviso (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	titulo VARCHAR(100),
-	descricao VARCHAR(150),
-	fk_usuario INT,
-	FOREIGN KEY (fk_usuario) REFERENCES usuario(id)
+create table episodio (
+  idEpisodio int primary key auto_increment,
+  titulo varchar(100) not null,
+  numero int not null,
+  fkTemporada int not null,
+  constraint fk_epiTemp foreign key (fkTemporada) references temporada(idTemporada)
 );
 
-create table aquario (
-/* em nossa regra de negócio, um aquario tem apenas um sensor */
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	descricao VARCHAR(300),
-	fk_empresa INT,
-	FOREIGN KEY (fk_empresa) REFERENCES empresa(id)
+create table avaliacaoEpisodio (
+  idAvaliacao int primary key auto_increment,
+  assistido tinyint default 0,        
+  reassistido tinyint default 0,       
+  nota int check (nota >= 0 and nota <= 10), 
+  dataAvaliacao datetime default current_timestamp,
+  fkUsuario int,
+  fkEpisodio int,
+  constraint fk_user foreign key (fkUsuario) references usuario(idUsuario),
+  constraint fk_epi foreign key (fkEpisodio) references episodio(idEpisodio)
 );
 
-/* esta tabela deve estar de acordo com o que está em INSERT de sua API do arduino - dat-acqu-ino */
-
-create table medida (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	dht11_umidade DECIMAL,
-	dht11_temperatura DECIMAL,
-	luminosidade DECIMAL,
-	lm35_temperatura DECIMAL,
-	chave TINYINT,
-	momento DATETIME,
-	fk_aquario INT,
-	FOREIGN KEY (fk_aquario) REFERENCES aquario(id)
+CREATE TABLE favoritosTemporada (
+  idFavorito INT PRIMARY KEY AUTO_INCREMENT,
+  fkUsuario INT NOT NULL,
+  fkTemporada INT NOT NULL,
+  CONSTRAINT fk_favUser FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
+  CONSTRAINT fk_favTemp FOREIGN KEY (fkTemporada) REFERENCES temporada(idTemporada),
+  UNIQUE KEY unique_fav (fkUsuario, fkTemporada)  
 );
 
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 1', 'ED145B');
-insert into empresa (razao_social, codigo_ativacao) values ('Empresa 2', 'A1B2C3');
-insert into aquario (descricao, fk_empresa) values ('Aquário de Estrela-do-mar', 1);
-insert into aquario (descricao, fk_empresa) values ('Aquário de Peixe-dourado', 2);
+insert into usuario (nome, email, personagemFavorito, senha)
+values 
+  ('Lucas Scott', 'lucas@email.com', 'Keith Scott', 'senhalucas'),
+  ('Peyton Sawyer', 'peyton@email.com', 'Jake Jagielski', 'senhapeyton');
+
+insert into temporada (numero)
+values (1), (2);
+
+insert into episodio (titulo, numero, fkTemporada)
+values 
+  ('Pilot', 1, 1),
+  ('The Places You Have Come to Fear the Most', 2, 1),
+  ('The Desperate Kingdom of Love', 1, 2),
+  ('Truth Doesn’t Make a Noise', 2, 2);
+
+insert into avaliacaoEpisodio (assistido, reassistido, nota, fkUsuario, fkEpisodio)
+values 
+  (1, 0, 8, 1, 1),  
+  (1, 1, 9, 1, 2),   
+  (1, 0, 10, 1, 3),  
+  (0, 0, null, 1, 4),
+  (1, 1, 10, 2, 1);  
