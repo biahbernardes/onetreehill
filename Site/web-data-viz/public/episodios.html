@@ -13,7 +13,7 @@
       <div class="sidebar">
         <div class="profile">
           <img src="./assets/account.png" alt="Perfil"/>
-          <h1>Olá, Bia!</h1>
+          <h1>Olá, <span id="b_usuario">usuário</span>!</h1>
         </div>
 
         <a href="./dashboard.html">Visão Geral</a>
@@ -48,6 +48,7 @@
     </div>
 
     <script>
+      b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
       const episodiosPorTemporada = {
         1: [
           { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },

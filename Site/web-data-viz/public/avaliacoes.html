@@ -12,7 +12,7 @@
     <div class="sidebar">
       <div class="profile">
         <img src="./assets/account.png" alt="Perfil" />
-        <h1>Olá, Bia!</h1>
+        <h1>Olá, <span id="b_usuario">usuário</span>!</h1>
       </div>
       <a href="./dashboard.html">Visão Geral</a>
       <a href="./episodios.html">Temporadas e Episódios</a>
@@ -30,40 +30,44 @@
 
     </div>
   <script>
-    var avaliacoes = [
-      { temp: "1", ep: "1", status: "Assistido", nota: 4, img: "temp1ep11.jpg" },
-      { temp: "1", ep: "2", status: "Assistido", nota: 5, img: "temp1ep12.jpg" },
-      { temp: "1", ep: "3", status: "Assistido", nota: 4, img: "temp1ep13.jpg" },
-      { temp: "2", ep: "1", status: "Assistido", nota: 5, img: "temp2ep11.jpg" },
-      { temp: "2", ep: "2", status: "Não assistido", nota: 0, img: "temp2ep12.jpg" },
-      { temp: "3", ep: "1", status: "Assistido", nota: 3, img: "temp3ep11.jpg" },
-      { temp: "3", ep: "2", status: "Assistido", nota: 4, img: "temp3ep12.jpg" },
-      { temp: "3", ep: "3", status: "Assistido", nota: 5, img: "temp3ep13.jpg" },
-      { temp: "3", ep: "4", status: "Assistido", nota: 0, img: "temp3ep14.jpg" },
-      { temp: "4", ep: "1", status: "Assistido", nota: 2, img: "temp4ep11.jpg" }
-    ];
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    var idUsuario = sessionStorage.ID_USUARIO;
 
-    function card(a, i) {
-      var estrelas = "";
-      var j = 0;
-      while (j < a.nota) {
-        estrelas += "⭐";
-        j++;
+  fetch(`/avaliacoes/${idUsuario}`)
+    .then(resposta => resposta.json())
+    .then(avaliacoes => {
+      var final = "";
+      var i = 0;
+      while (i < avaliacoes.length) {
+        var a = avaliacoes[i];
+        final += card(a, i);
+        i++;
       }
-      if (estrelas === "") {
-        estrelas = "—";
-      }
+      div_avaliacoes.innerHTML = final;
+    });
 
-      return (
-        `<div class="episodio-card">
-         <img src="./assets/episodios/${a.img}" class="episodio-img">
-         <h3>Episódio ${(i + 1)} </h3> 
-         <p>Temporada: ${a.temp} </p>
-         <p>Status: ${a.status} </p>
-         <p>Avaliação: ${estrelas} </p>
-         </div>`
-      );
+  function card(a, i) {
+    var estrelas = "";
+    var j = 0;
+    while (j < a.nota) {
+      estrelas += "⭐";
+      j++;
     }
+    if (estrelas === "") {
+      estrelas = "—";
+    }
+
+    return `
+      <div class="episodio-card">
+        <img src="./assets/episodios/${a.img}" class="episodio-img">
+        <h3>Episódio ${i + 1}</h3>
+        <p>Temporada: ${a.temporada}</p>
+        <p>Status: ${a.assistido == 1 ? "Assistido" : "Não assistido"}</p>
+        <p>Reassistido: ${a.reassistido == 1 ? "Sim" : "Não"}</p>
+        <p>Avaliação: ${estrelas}</p>
+      </div>
+    `;
+  }
 
     function mostrarAvaliacoes() {
       var final = ""; 
