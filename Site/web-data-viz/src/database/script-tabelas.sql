@@ -5,18 +5,53 @@
 /*
 comandos para mysql server
 */
-create database onetreehill;
-use onetreehill;
+CREATE DATABASE onetreehill;
+USE onetreehill;
 
-create table usuario (
-  idUsuario int primary key auto_increment,
-  nome varchar(45) not null,
-  email varchar(100) not null unique,
-  personagemFavorito varchar(100) not null,
-  senha varchar(100) not null
+CREATE TABLE usuario (
+  idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+  nome varchar(45) NOT NULL,
+  email varchar(100) NOT NULL UNIQUE,
+  personagemFavorito VARCHAR(50) NOT NULL,
+  senha VARCHAR(80) NOT NULL
 );
 
-create table temporada (
+CREATE TABLE quiz(
+idQuiz INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+acertos INT,
+perguntas INT DEFAULT 8,
+fkUsuario INT,
+FOREIGN KEY(fkUsuario) REFERENCES usuario(idUsuario)
+);
+
+INSERT INTO usuario (nome, email, personagemFavorito, senha) VALUES
+('Haley James', 'haley@onetreehill.com', 'Nathan Scott', 'tutor123'),
+('Mouth McFadden', 'mouth@onetreehill.com', 'Jimmy Edwards', 'comentarista'),
+('Rachel Gatina', 'rachel@onetreehill.com', 'Brooke Davis', 'cheerleader');
+
+SELECT * FROM usuario;
+
+INSERT INTO quiz (nome, acertos, fkUsuario) VALUES
+('Quiz Haley', 7, 1),         
+('Quiz Mouth', 6, 3),         
+('Quiz Rachel', 8, 2);       
+
+SELECT * FROM quiz;
+
+-- média de acertos por usuário 
+SELECT  u.nome, 
+AVG(q.acertos) AS media_acertos FROM usuario u
+JOIN quiz q ON u.idUsuario = q.fkUsuario
+GROUP BY u.idUsuario;
+    
+-- média todos os quizzes 
+SELECT AVG(acertos) AS media_geral FROM quiz;
+
+
+
+
+/*create table temporada (
   idTemporada int primary key auto_increment,
   numero int not null
 );
@@ -71,4 +106,4 @@ values
   (1, 1, 9, 1, 2),   
   (1, 0, 10, 1, 3),  
   (0, 0, null, 1, 4),
-  (1, 1, 10, 2, 1);  
+  (1, 1, 10, 2, 1);  */
