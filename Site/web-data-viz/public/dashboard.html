@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Minhas Avaliações | One Tree Hill</title>
-  <link rel="stylesheet" href="./css/avaliacoes.css" />
+  <link rel="stylesheet" href="./style/dashboard.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -12,154 +12,40 @@
     <div class="sidebar">
       <div class="profile">
         <img src="./assets/account.png" alt="Perfil" />
-        <h1>Olá, <span id="b_usuario">usuário</span>!</h1>
+        <h1>Olá, <span id="b_usuario"></span>!</h1>
       </div>
-      <a href="./dashboard.html">Visão Geral</a>
       <a href="./episodios.html">Temporadas e Episódios</a>
-      <a href="./avaliacoes.html">Minhas Avaliações</a>
-      <a href="./index.html" class="logout-btn">
+      <a href="./quiz.html">Quiz</a>
+      <a href="./dashboard.html">Visão Geral</a>
+      <a href="./login.html" class="logout-btn">
         Sair
         <img src="./assets/botao -sair.png" alt="Logout" class="logout-icon" />
       </a>
     </div>
 
-    <div class="main">
+    <div class="main-dash">
       <h2>Minhas Avaliações</h2>
 
-      <div id="div_avaliacoes" class="episodios-container"></div>
-
-      <h3 style="margin-top: 50px;">📊 Visão Geral das Temporadas</h3>
-      <div class="graficos-metricas">
-        <div class="grafico">
-          <h4> Episódios assistidos por Temporada</h4>
-          <canvas id="graficoBarras"></canvas>
+      <!-- KPI cards -->
+      <div class="kpi-container">
+        <div class="kpi-card">
+          <p class="kpi-label">Acertos</p>
+          <p class="kpi-value" id="kpiAcertos">--%</p>
         </div>
-        <div class="grafico">
-          <h4> Temporadas favoritas </h4>
-          <canvas id="graficoPizza"></canvas>
+        <div class="kpi-card">
+          <p class="kpi-label">Erros</p>
+          <p class="kpi-value" id="kpiErros">--%</p>
+        </div>
+      </div>
+      <div class="kpiData">Última Atualização: <span id="dataHora"></span></div>
+
+      <div class="conteudo-dashboard">
+        <div class="grafico-container">
+          <canvas id="grafico"></canvas>
         </div>
       </div>
     </div>
   </div>
-
-  <script>
-
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-    function mostrarAvaliacoes() {
-    function mostrarAvaliacoes() {
-
-  div_avaliacoes.innerHTML = `Carregando avaliações...`;
-
-  fetch('/avaliacoes')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(avaliacoes) {
-      if (avaliacoes.length === 0) {
-        div_avaliacoes.innerHTML = `<p>Você ainda não avaliou nenhum episódio.</p>`;
-        return;
-      }
-
-      for (var i = 0; i < avaliacoes.length; i++) {
-        var av = avaliacoes[i];
-        div_avaliacoes.innerHTML += `<br>
-          Episódio: ${av.episodioNome} - Avaliação: ${av.avaliacao} estrelas - ${av.assistido ? 'Assistido' : 'Não assistido'}${av.reassistido ? ' (Reassistido)' : ''}
-        </br>`;
-      }
-    })
-    .catch(function(error) {
-      div_avaliacoes.innerHTML = `<p>Erro ao carregar avaliações.</p>`;
-      console.error('Erro:', error);
-    });
-}
-    }
-
-    function gerarGraficos() {
-      fetch('/episodios')
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(episodios) {
-          var assistidosPorTemporada = {};
-          var temporadas = [];
-
-          for (var i = 0; i < episodios.length; i++) {
-            var temp = episodios[i].temporada;
-            var total = episodios[i].totalAssistido;
-
-            if (assistidosPorTemporada[temp] === undefined) {
-              assistidosPorTemporada[temp] = 0;
-              temporadas.push(temp);
-            }
-
-            assistidosPorTemporada[temp] = assistidosPorTemporada[temp] + total;
-          }
-
-          var assistidos = [];
-          for (var j = 0; j < temporadas.length; j++) {
-            assistidos.push(assistidosPorTemporada[temporadas[j]]);
-          }
-
-          fetch('/avaliacoes')
-            .then(function(response) {
-              return response.json();
-            })
-            .then(function(temporadasBemAvaliadas) {
-              var maisAvaliadas = [];
-
-              for (var x = 0; x < temporadasBemAvaliadas.length; x++) {
-                maisAvaliadas.push(temporadasBemAvaliadas[x].episodiosBemAvaliados);
-              }
-
-              new Chart(document.getElementById("graficoBarras"), {
-                type: "bar",
-                data: {
-                  labels: temporadas,
-                  datasets: [{
-                    label: "Episódios Assistidos",
-                    data: assistidos,
-                    backgroundColor: "#32003d"
-                  }]
-                },
-                options: {
-                  responsive: true,
-                  scales: {
-                    y: {
-                      beginAtZero: true,
-                      ticks: { stepSize: 1 }
-                    }
-                  }
-                }
-              });
-
-              new Chart(document.getElementById("graficoPizza"), {
-                type: "pie",
-                data: {
-                  labels: temporadas,
-                  datasets: [{
-                    label: "Temporadas Avaliadas",
-                    data: maisAvaliadas,
-                    backgroundColor: ["#633657", "#84b5d6", "#aaa", "#ffcdd2"]
-                  }]
-                },
-                options: {
-                  responsive: true
-                }
-              });
-
-            })
-            .catch(function(error) {
-              console.error('Erro ao carregar temporadas bem avaliadas:', error);
-            });
-        })
-        .catch(function(error) {
-          console.error('Erro ao carregar episódios mais assistidos:', error);
-        });
-    }
-
-    mostrarAvaliacoes();
-    gerarGraficos();
-  </script>
+  <script src="./js/dashboard.js"></script>
 </body>
 </html>
