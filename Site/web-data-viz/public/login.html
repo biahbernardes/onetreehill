@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AquaTech | Cadastro</title>
+  <title>One Tree Hill | Login</title>
 
   <script src="./js/sessao.js"></script>
 
-  <link rel="stylesheet" href="./css/cadastro.css" />
+  <link rel="stylesheet" href="./style/login.css" />
   <link rel="icon" href="./assets/icon/favicon2.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
@@ -37,12 +37,11 @@
           <a href="#trilha">Trilha sonora</a>
         </h5>
         <h5>
-          <a href="episodios.html">Login</a>
+          <a href="login.html">Login</a>
         </h5>
       </ul>
     </div>
   </div>
-
   <!--header fim-->
 
   <div class="login">
@@ -67,10 +66,14 @@
           </div>
           <button class="botao" onclick="entrar()">Entrar</button>
         </div>
-
         <div id="div_aguardar" class="loading-div" style="display:none;">
           <img src="./assets/circle-loading.gif" id="loading-gif" />
         </div>
+
+        <div class="link">
+    <p>Não tem conta? <a href="cadastro.html">Clique aqui</a> para criar uma!</p>
+  </div>
+</div>
 
         <div id="div_erros_login"></div>
       </div>

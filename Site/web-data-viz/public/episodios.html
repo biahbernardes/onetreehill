@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Episódios | One Tree Hill</title>
-    <link rel="stylesheet" href="./css/episodios.css" />
+    <link rel="stylesheet" href="./style/episodios.css" />
+    <link rel="stylesheet" href="./style/quiz.css" />
     <link rel="shortcut icon" href="./assets/icone2.jpg" type="image/x-icon">
   </head>
 
@@ -13,13 +14,13 @@
       <div class="sidebar">
         <div class="profile">
           <img src="./assets/account.png" alt="Perfil"/>
-          <h1>Olá, <span id="b_usuario">usuário</span>!</h1>
+         <h1>Olá, <span id="b_usuario">usuário</span>!</h1>
         </div>
 
-        <a href="./dashboard.html">Visão Geral</a>
-        <a href="./episodios.html">Temporadas e Episódios
+         <a href="./episodios.html">Temporadas e Episódios
         </a>
-        <a href="./avaliacoes.html">Minhas Avaliações</a>
+        <a href="./quiz.html">Quiz</a>
+        <a href="./dashboard.html">Visão Geral</a>
 
         <a href="./index.html" class="logout-btn">
           Sair
@@ -48,7 +49,7 @@
     </div>
 
     <script>
-      b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+       b_usuario.innerHTML = sessionStorage.NOME_USUARIO || "usuário";
       const episodiosPorTemporada = {
         1: [
           { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },
@@ -76,10 +77,10 @@
 
         ],
          2: [
-          { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },
-          { titulo: "The Places You Have Come to Fear the Most", img: "./assets/episodios/temp1ep2.png", numero: 2 },
-          { titulo: "Are You True?", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
-          { titulo: "Crash Into You", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
+          { titulo: "The Desperate Kingdom Of Love", img: "./assets/episodios/temp2ep1.jpg", numero: 1 },
+          { titulo: "The Truth Doesn’t Make A Noise", img: "./assets/episodios/temp1ep2.png", numero: 2 },
+          { titulo: "Near Wild Heaven", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
+          { titulo: "You Can’t Always Get What You Want", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
           { titulo: "All That You Can't Leave Behind", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
           { titulo: "Everynight is the Another Story", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
           { titulo: "Life In the Glass House", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
@@ -151,129 +152,117 @@
 
         ],
           5: [
-          { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },
-          { titulo: "The Places You Have Come to Fear the Most", img: "./assets/episodios/temp1ep2.png", numero: 2 },
-          { titulo: "Are You True?", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
-          { titulo: "Crash Into You", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
-          { titulo: "All That You Can't Leave Behind", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
-          { titulo: "Everynight is the Another Story", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
-          { titulo: "Life In the Glass House", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
-          { titulo: "The Search For Something More", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
-          { titulo: "With Arms Outstretched", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
-          { titulo: "You Gotta Go There To Come Back", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
-          { titulo: "The Living Years", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
-          { titulo: "Crash Course In Polite Conversations?", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
-          { titulo: "Hanging by a Moment", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
-          { titulo: "I Shall Belive", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
-          { titulo: "Sunddenly Everything Has Changed", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
-          { titulo: "The First Cut is the Deepest", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
-          { titulo: "Spirit In the Night", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
-          { titulo: "To Wish Impossible Things", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
-          { titulo: "How Can You Be Sure?", img: "./assets/episodios/temp1ep19.jpg", numero: 19 },
-          { titulo: "What is and What Should Never Be", img: "./assets/episodios/temp1ep20.jpg", numero: 20 },
-          { titulo: "The Leaving Song", img: "./assets/episodios/temp1ep21.jpg", numero: 21 },
-          { titulo: "The Game That Paly Us", img: "./assets/episodios/temp1ep22.jpg", numero: 22 },
+          { titulo: "4 Years, 6 Months, 2 Days", img: "./assets/episodios/piloto.jpg", numero: 1 },
+          { titulo: "Racing Like A Pro", img: "./assets/episodios/temp1ep2.png", numero: 2 },
+          { titulo: "My Way Home Is Through You", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
+          { titulo: "It's Alright, Ma (I'm Only Bleeding)", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
+          { titulo: "I Forgot, To Remember, To Forget", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
+          { titulo: "Don't Dream, It's Over", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
+          { titulo: "In Da Club", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
+          { titulo: "Please, Please, Please, Let Me Get What I Want", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
+          { titulo: "For Tonight You're Only Here To Know", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
+          { titulo: "Running To Stand Still", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
+          { titulo: "You're Gonna Need Someone On Your Side", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
+          { titulo: "Hundred", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
+          { titulo: "Echoes, Silencie, Patience and Grace", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
+          { titulo: "What Do You Go Home To", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
+          { titulo: "Life Is a Short", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
+          { titulo: "Cryin' Won't Help You Now", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
+          { titulo: "Hate Is Safer Than Love", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
+          { titulo: "What Comes After The Blues - Season Finale", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
 
         ],
           6: [
-          { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },
-          { titulo: "The Places You Have Come to Fear the Most", img: "./assets/episodios/temp1ep2.png", numero: 2 },
-          { titulo: "Are You True?", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
-          { titulo: "Crash Into You", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
-          { titulo: "All That You Can't Leave Behind", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
-          { titulo: "Everynight is the Another Story", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
-          { titulo: "Life In the Glass House", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
-          { titulo: "The Search For Something More", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
-          { titulo: "With Arms Outstretched", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
-          { titulo: "You Gotta Go There To Come Back", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
-          { titulo: "The Living Years", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
-          { titulo: "Crash Course In Polite Conversations?", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
-          { titulo: "Hanging by a Moment", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
-          { titulo: "I Shall Belive", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
-          { titulo: "Sunddenly Everything Has Changed", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
-          { titulo: "The First Cut is the Deepest", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
-          { titulo: "Spirit In the Night", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
-          { titulo: "To Wish Impossible Things", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
-          { titulo: "How Can You Be Sure?", img: "./assets/episodios/temp1ep19.jpg", numero: 19 },
-          { titulo: "What is and What Should Never Be", img: "./assets/episodios/temp1ep20.jpg", numero: 20 },
-          { titulo: "The Leaving Song", img: "./assets/episodios/temp1ep21.jpg", numero: 21 },
-          { titulo: "The Game That Paly Us", img: "./assets/episodios/temp1ep22.jpg", numero: 22 },
+          { titulo: "Touch Me I'm Going To Scream", img: "./assets/episodios/piloto.jpg", numero: 1 },
+          { titulo: "One Million Billionth of a Millisecond on a Sunday Morning", img: "./assets/episodios/temp1ep2.png", numero: 2 },
+          { titulo: "Get Cape Wear Cape Fly", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
+          { titulo: "Bridge Over Trouble", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
+          { titulo: "You've Dug Your Own Grave, Now Lie in It", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
+          { titulo: "Choosing My Own Way Of Life", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
+          { titulo: "Messing With the Kid", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
+          { titulo: "Our Life Is Not The Movie Or Maybe", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
+          { titulo: "Sympathy for the Devil", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
+          { titulo: "Even Fairy Tale Characters Would Be Jealous", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
+          { titulo: "We Three (My Echo,My Shadow And Me)", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
+          { titulo: "You Have to Be Joking (Autopsy of the Devil's Brain)", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
+          { titulo: "Things a Mama Don't Know", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
+          { titulo: "A Hand to Take Hold of the Scene", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
+          { titulo: "We Change, We Wait", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
+          { titulo: "Screenwriter's Blues", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
+          { titulo: "You and Me and the Bottle Makes Three Tonight", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
+          { titulo: "Searching for a Former Clarity", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
+          { titulo: "Letting Go", img: "./assets/episodios/temp1ep19.jpg", numero: 19 },
+          { titulo: "I Would for You", img: "./assets/episodios/temp1ep20.jpg", numero: 20 },
+          { titulo: "A Kiss to Build a Dream On", img: "./assets/episodios/temp1ep21.jpg", numero: 21 },
+          { titulo: "Show Me How to Live", img: "./assets/episodios/temp1ep22.jpg", numero: 22 },
+          { titulo: "Forever and Almost Always", img: "./assets/episodios/temp1ep23.jpg", numero: 23 },
+          { titulo: "Remember Me As Time of Day", img: "./assets/episodios/temp1ep24.jpg", numero: 24 },
 
         ],
          7: [
-          { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },
-          { titulo: "The Places You Have Come to Fear the Most", img: "./assets/episodios/temp1ep2.png", numero: 2 },
-          { titulo: "Are You True?", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
-          { titulo: "Crash Into You", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
-          { titulo: "All That You Can't Leave Behind", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
-          { titulo: "Everynight is the Another Story", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
-          { titulo: "Life In the Glass House", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
-          { titulo: "The Search For Something More", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
-          { titulo: "With Arms Outstretched", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
-          { titulo: "You Gotta Go There To Come Back", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
-          { titulo: "The Living Years", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
-          { titulo: "Crash Course In Polite Conversations?", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
-          { titulo: "Hanging by a Moment", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
-          { titulo: "I Shall Belive", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
-          { titulo: "Sunddenly Everything Has Changed", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
-          { titulo: "The First Cut is the Deepest", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
-          { titulo: "Spirit In the Night", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
-          { titulo: "To Wish Impossible Things", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
-          { titulo: "How Can You Be Sure?", img: "./assets/episodios/temp1ep19.jpg", numero: 19 },
-          { titulo: "What is and What Should Never Be", img: "./assets/episodios/temp1ep20.jpg", numero: 20 },
-          { titulo: "The Leaving Song", img: "./assets/episodios/temp1ep21.jpg", numero: 21 },
-          { titulo: "The Game That Paly Us", img: "./assets/episodios/temp1ep22.jpg", numero: 22 },
+          { titulo: "4h30 (Aparently They Were Traveling Abroad)", img: "./assets/episodios/piloto.jpg", numero: 1 },
+          { titulo: "What Are You Willing to Lose", img: "./assets/episodios/temp1ep2.png", numero: 2 },
+          { titulo: "Hold My Hand as I'm Lowered", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
+          { titulo: "Believe Me, I'm Lying", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
+          { titulo: "Your Cheatin' Heart", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
+          { titulo: "Deep Ocean Vast Sea", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
+          { titulo: "I and Love and You", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
+          { titulo: "I Just Died in Your Arms", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
+          { titulo: "Now You Lift Your Eyes To The Sun", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
+          { titulo: "You Are A Runner And I Am My Father's Son", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
+          { titulo: "You Know I Love You Don't You", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
+          { titulo: "Some Roads Lead Nowhere", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
+          { titulo: "Weeks Go By Like Days", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
+          { titulo: "Family Affair", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
+          { titulo: "Don't You Forget About Me", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
+          { titulo: "My Attendance is Bad But My Intentions Are Good", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
+          { titulo: "At the Bottom Of Everything", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
+          { titulo: "The Last Day of Our Acquaintance", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
+          { titulo: "Every Picture Tells a Story", img: "./assets/episodios/temp1ep19.jpg", numero: 19 },
+          { titulo: "Learning to Fall", img: "./assets/episodios/temp1ep20.jpg", numero: 20 },
+          { titulo: "What's In The Ground Belongs To You", img: "./assets/episodios/temp1ep21.jpg", numero: 21 },
+          { titulo: "Almost Everything I Wish I’d Said The Last Time I Saw You", img: "./assets/episodios/temp1ep22.jpg", numero: 22 },
 
         ],
          8: [
-          { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },
-          { titulo: "The Places You Have Come to Fear the Most", img: "./assets/episodios/temp1ep2.png", numero: 2 },
-          { titulo: "Are You True?", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
-          { titulo: "Crash Into You", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
-          { titulo: "All That You Can't Leave Behind", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
-          { titulo: "Everynight is the Another Story", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
-          { titulo: "Life In the Glass House", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
-          { titulo: "The Search For Something More", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
-          { titulo: "With Arms Outstretched", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
-          { titulo: "You Gotta Go There To Come Back", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
-          { titulo: "The Living Years", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
-          { titulo: "Crash Course In Polite Conversations?", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
-          { titulo: "Hanging by a Moment", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
-          { titulo: "I Shall Belive", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
-          { titulo: "Sunddenly Everything Has Changed", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
-          { titulo: "The First Cut is the Deepest", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
-          { titulo: "Spirit In the Night", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
-          { titulo: "To Wish Impossible Things", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
-          { titulo: "How Can You Be Sure?", img: "./assets/episodios/temp1ep19.jpg", numero: 19 },
-          { titulo: "What is and What Should Never Be", img: "./assets/episodios/temp1ep20.jpg", numero: 20 },
-          { titulo: "The Leaving Song", img: "./assets/episodios/temp1ep21.jpg", numero: 21 },
-          { titulo: "The Game That Paly Us", img: "./assets/episodios/temp1ep22.jpg", numero: 22 },
+          { titulo: "Asleep at Heaven's Gate", img: "./assets/episodios/temp8ep1.jpg", numero: 1 },
+          { titulo: "I Can't See You, But I Know You're There", img: "./assets/episodios/temp8ep2.jpg", numero: 2 },
+          { titulo: "The Space In Between", img: "./assets/episodios/temp8ep3.jpg", numero: 3 },
+          { titulo: "We All Fall Down", img: "./assets/episodios/temp8ep4.jpg", numero: 4 },
+          { titulo: "Nobody Taught Us to Quit", img: "./assets/episodios/temp8ep5.jpg", numero: 5 },
+          { titulo: "Not Afraid", img: "./assets/episodios/temp8ep6.jpg", numero: 6 },
+          { titulo: "Luck Be a Lady", img: "./assets/episodios/temp8ep7.jpg", numero: 7 },
+          { titulo: "Mouthful Of Diamonds", img: "./assets/episodios/temp8ep8.jpg", numero: 8 },
+          { titulo: "Between Raising Hell And Amazing Grace", img: "./assets/episodios/temp8ep9.jpg", numero: 9 },
+          { titulo: "Lists, Plans", img: "./assets/episodios/temp8ep10.jpg", numero: 10 },
+          { titulo: "Darnkess On The Edge Of Town", img: "./assets/episodios/temp8ep11.jpg", numero: 11 },
+          { titulo: "The Drinks We Drank Last Night", img: "./assets/episodios/temp8ep12.jpg", numero: 12 },
+          { titulo: "The Other Half Of Me", img: "./assets/episodios/temp8ep13.jpg", numero: 13 },
+          { titulo: "Holding Out For A Hero", img: "./assets/episodios/temp8ep14.jpg", numero: 14 },
+          { titulo: "Valentine's Day Is Over", img: "./assets/episodios/temp8ep15.jpg", numero: 15 },
+          { titulo: "I Think I'm Gonna Like It Here", img: "./assets/episodios/temp8ep16.jpg", numero: 16 },
+          { titulo: "The Smoker You Drink, The Player You Get", img: "./assets/episodios/temp8ep17.jpg", numero: 17 },
+          { titulo: "Quiet Little Voices", img: "./assets/episodios/temp8ep18.jpg", numero: 18 },
+          { titulo: "Where Not to Look for Freedom", img: "./assets/episodios/temp8ep19.jpg", numero: 19 },
+          { titulo: "The Man Who Sailed Around His Soul", img: "./assets/episodios/temp8ep20.jpg", numero: 20 },
+          { titulo: "Flightless Bird, American Mouth", img: "./assets/episodios/temp8ep21.jpg", numero: 21 },
+          { titulo: "This Is My House, This Is My Home", img: "./assets/episodios/temp8ep22.jpg", numero: 22 },
 
         ],
           9: [
-          { titulo: "Pilot", img: "./assets/episodios/piloto.jpg", numero: 1 },
-          { titulo: "The Places You Have Come to Fear the Most", img: "./assets/episodios/temp1ep2.png", numero: 2 },
-          { titulo: "Are You True?", img: "./assets/episodios/temp1ep3.jpg", numero: 3 },
-          { titulo: "Crash Into You", img: "./assets/episodios/temp1ep4.jpg", numero: 4 },
-          { titulo: "All That You Can't Leave Behind", img: "./assets/episodios/temp1ep5.jpg", numero: 5 },
-          { titulo: "Everynight is the Another Story", img: "./assets/episodios/temp1ep6.jpg", numero: 6 },
-          { titulo: "Life In the Glass House", img: "./assets/episodios/temp1ep7.jpg", numero: 7 },
-          { titulo: "The Search For Something More", img: "./assets/episodios/temp1ep8.jpg", numero: 8 },
-          { titulo: "With Arms Outstretched", img: "./assets/episodios/temp1ep9.jpg", numero: 9 },
-          { titulo: "You Gotta Go There To Come Back", img: "./assets/episodios/temp1ep10.jpg", numero: 10 },
-          { titulo: "The Living Years", img: "./assets/episodios/temp1ep11.jpg", numero: 11 },
-          { titulo: "Crash Course In Polite Conversations?", img: "./assets/episodios/temp1ep12.jpg", numero: 12 },
-          { titulo: "Hanging by a Moment", img: "./assets/episodios/temp1ep13.jpg", numero: 13 },
-          { titulo: "I Shall Belive", img: "./assets/episodios/temp1ep14.jpg", numero: 14 },
-          { titulo: "Sunddenly Everything Has Changed", img: "./assets/episodios/temp1ep15.jpg", numero: 15 },
-          { titulo: "The First Cut is the Deepest", img: "./assets/episodios/temp1ep16.jpg", numero: 16 },
-          { titulo: "Spirit In the Night", img: "./assets/episodios/temp1ep17.jpg", numero: 17 },
-          { titulo: "To Wish Impossible Things", img: "./assets/episodios/temp1ep18.jpg", numero: 18 },
-          { titulo: "How Can You Be Sure?", img: "./assets/episodios/temp1ep19.jpg", numero: 19 },
-          { titulo: "What is and What Should Never Be", img: "./assets/episodios/temp1ep20.jpg", numero: 20 },
-          { titulo: "The Leaving Song", img: "./assets/episodios/temp1ep21.jpg", numero: 21 },
-          { titulo: "The Game That Paly Us", img: "./assets/episodios/temp1ep22.jpg", numero: 22 },
-
+          { titulo: "Know This, We've Noticed", img: "./assets/episodios/temp9ep1.jpg", numero: 1 },
+          { titulo: "In The Room Where You Sleep", img: "./assets/episodios/temp9ep2.jpg", numero: 2 },
+          { titulo: "Love The Way You Lie", img: "./assets/episodios/temp9ep3.jpg", numero: 3 },
+          { titulo: "Don't You Wanna Share The Guilt?", img: "./assets/episodios/temp9ep4.jpg", numero: 4 },
+          { titulo: "The Killing Moon", img: "./assets/episodios/temp9ep5.jpg", numero: 5 },
+          { titulo: "Catastrophe & The Cure", img: "./assets/episodios/temp9ep6.jpg", numero: 6 },
+          { titulo: "Last Know Surroundings", img: "./assets/episodios/temp9ep7.jpg", numero: 7 },
+          { titulo: "A Rush of Blood to the Head", img: "./assets/episodios/temp9ep8.png", numero: 8 },
+          { titulo: "Every Breath Is A Bomb", img: "./assets/episodios/temp9ep9.jpg", numero: 9 },
+          { titulo: "Hardcore Will Never Die, But You Will", img: "./assets/episodios/temp9ep10.jpg", numero: 10 },
+          { titulo: "Danny Boy", img: "./assets/episodios/temp9ep11.jpg", numero: 11 },
+          { titulo: "Anyone Who Had A Heart", img: "./assets/episodios/temp9ep12.jpg", numero: 12 },
+          { titulo: "One Tree Hill", img: "./assets/episodios/temp9ep13.jpg", numero: 13 },
         ],
         
       };
@@ -291,21 +280,6 @@
   <div class="episodio-card">
     <img src="${ep.img}" alt="${ep.titulo}" class="episodio-img" />
     <h3>${ep.numero}. ${ep.titulo}</h3>
-    <div class="checkbox-group">
-      <label><input type="checkbox"> Já assisti</label>
-      <label><input type="checkbox"> Reassistido</label>
-    </div>
-    <div class="avaliacao">
-      Avaliação:
-      <select>
-        <option value="0">0⭐</option>
-        <option value="1">1⭐</option>
-        <option value="2">2⭐</option>
-        <option value="3">3⭐</option>
-        <option value="4">4⭐</option>
-        <option value="5">5⭐</option>
-      </select>
-    </div>
   </div>
 `;
   }
