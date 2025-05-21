@@ -1,125 +1,137 @@
-var alertas = [];
+const idUsuario = sessionStorage.ID_USUARIO;
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO || "usuário";
 
-function obterdados(idAquario) {
-    fetch(`/medidas/tempo-real/${idAquario}`)
-        .then(resposta => {
-            if (resposta.status == 200) {
-                resposta.json().then(resposta => {
+const perguntas = [
+  {
+    pergunta: "Quem é o verdadeiro pai de Lucas Scott?",
+    opcoes: ["Dan Scott", "Keith Scott", "Nathan Scott", "Whitey Durham"],
+    resposta: "Dan Scott"
+  },
+  {
+    pergunta: "Qual personagem sonha em ser designer de moda e vai para a Califórnia por um tempo?",
+    opcoes: ["Haley James", "Peyton Sawyer", "Brooke Davis", "Rachel Gatina"],
+    resposta: "Brooke Davis"
+  },
+  {
+    pergunta: "Qual dessas bandas realmente apareceu tocando no Tric durante a série?",
+    opcoes: ["Paramore", "Fall Out Boy", "Coldplay", "Linkin Park"],
+    resposta: "Fall Out Boy"
+  },
+  {
+    pergunta: "O que Haley faz antes de se casar com Nathan?",
+    opcoes: ["Se muda para Nova York", "Se junta a uma turnê como cantora", "Termina com Nathan", "Vai estudar fora do país"],
+    resposta: "Se junta a uma turnê como cantora"
+  },
+  {
+    pergunta: "Quem sofre um acidente de carro e fica em coma durante a 6ª temporada?",
+    opcoes: ["Lucas", "Dan", "Quentin", "Peyton"],
+    resposta: "Dan"
+  },
+  {
+    pergunta: "Qual mês tem 30 dias?",
+    opcoes: ["Janeiro", "Dezembro", "Junho", "Agosto"],
+    resposta: "Junho"
+  },
+  {
+    pergunta: "Quantas horas tem em um dia?",
+    opcoes: ["30 horas", "38 horas", "48 horas", "24 horas"],
+    resposta: "24 horas"
+  },
+  {
+    pergunta: "Qual destes números é ímpar?",
+    opcoes: ["Dez", "Doze", "Oito", "Onze"],
+    resposta: "Onze"
+  }
+];
 
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+let perguntaAtual = 0;
+let pontuacao = 0;
 
-                    alertar(resposta, idAquario);
-                });
-            } else {
-                console.error(`Nenhum dado encontrado para o id ${idAquario} ou erro na API`);
-            }
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
-        });
+function exibirPergunta() {
+  const pergunta = perguntas[perguntaAtual];
+  const questionEl = document.getElementById("question");
+  const optionsEl = document.getElementById("options");
 
+  questionEl.textContent = pergunta.pergunta;
+  optionsEl.innerHTML = "";
+
+  pergunta.opcoes.forEach(opcao => {
+    const botao = document.createElement("button");
+    botao.textContent = opcao;
+    botao.onclick = () => verificarResposta(opcao, botao);
+    optionsEl.appendChild(botao);
+  });
+
+  document.getElementById("next-button").style.display = "none";
 }
 
-function alertar(resposta, idAquario) {
-    var temp = resposta[0].temperatura;
+function verificarResposta(resposta, botaoClicado) {
+  const respostaCorreta = perguntas[perguntaAtual].resposta;
+  const botoes = document.querySelectorAll("#options button");
 
-    var grauDeAviso = '';
+  botoes.forEach(botao => {
+    botao.disabled = true;
+    if (botao.textContent === respostaCorreta) {
+      botao.classList.add("correto");
+    }
+  });
 
-    var limites = {
-        muito_quente: 23,
-        quente: 22,
-        ideal: 20,
-        frio: 10,
-        muito_frio: 5
-    };
+  if (resposta !== respostaCorreta) {
+    botaoClicado.classList.add("errado");
+  } else {
+    pontuacao++;
+  }
 
-    var classe_temperatura = 'cor-alerta';
-
-    if (temp >= limites.muito_quente) {
-        classe_temperatura = 'cor-alerta perigo-quente';
-        grauDeAviso = 'perigo quente'
-        grauDeAvisoCor = 'cor-alerta perigo-quente'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (temp < limites.muito_quente && temp >= limites.quente) {
-        classe_temperatura = 'cor-alerta alerta-quente';
-        grauDeAviso = 'alerta quente'
-        grauDeAvisoCor = 'cor-alerta alerta-quente'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (temp < limites.quente && temp > limites.frio) {
-        classe_temperatura = 'cor-alerta ideal';
-        removerAlerta(idAquario);
-    }
-    else if (temp <= limites.frio && temp > limites.muito_frio) {
-        classe_temperatura = 'cor-alerta alerta-frio';
-        grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cor-alerta alerta-frio'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    }
-    else if (temp <= limites.muito_frio) {
-        classe_temperatura = 'cor-alerta perigo-frio';
-        grauDeAviso = 'perigo frio'
-        grauDeAvisoCor = 'cor-alerta perigo-frio'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
-    }
-
-    var card;
-
-    if (document.getElementById(`temp_aquario_${idAquario}`) != null) {
-        document.getElementById(`temp_aquario_${idAquario}`).innerHTML = temp + "°C";
-    }
-
-    if (document.getElementById(`card_${idAquario}`)) {
-        card = document.getElementById(`card_${idAquario}`)
-        card.className = classe_temperatura;
-    }
+  document.getElementById("next-button").style.display = "block";
 }
 
-function exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor) {
-    var indice = alertas.findIndex(item => item.idAquario == idAquario);
+document.getElementById("next-button").addEventListener("click", () => {
+  perguntaAtual++;
+  if (perguntaAtual < perguntas.length) {
+    exibirPergunta();
+  } else {
+    exibirResultado();
+  }
+});
 
-    if (indice >= 0) {
-        alertas[indice] = { idAquario, temp, grauDeAviso, grauDeAvisoCor }
+function exibirResultado() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("result-container").style.display = "block";
+  // document.getElementById("score").textContent = `Você acertou ${pontuacao} de ${perguntas.length} perguntas.`;
+
+  const fkUsuario = sessionStorage.ID_USUARIO;
+
+  fetch("/quiz/inserirPontuacao", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      pontuacaoServer: pontuacao,
+      fkUsuarioServer: fkUsuario
+    }),
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.text().then(texto => {
+        console.error("Erro na resposta do backend:", texto);
+      });
     } else {
-        alertas.push({ idAquario, temp, grauDeAviso, grauDeAvisoCor });
+      console.log("Requisição bem-sucedida");
     }
-
-    exibirCards();
+  })
+  .catch(erro => {
+    console.error("Erro na requisição:", erro);
+  });
 }
 
-function removerAlerta(idAquario) {
-    alertas = alertas.filter(item => item.idAquario != idAquario);
-    exibirCards();
+function tentarNovamente(){
+  perguntaAtual = 0;
+  pontuacao = 0;
+  document.getElementById("result-container").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  exibirPergunta();
 }
 
-function exibirCards() {
-    alerta.innerHTML = '';
-
-    for (var i = 0; i < alertas.length; i++) {
-        var mensagem = alertas[i];
-        alerta.innerHTML += transformarEmDiv(mensagem);
-    }
-}
-
-function transformarEmDiv({ idAquario, temp, grauDeAviso, grauDeAvisoCor }) {
-
-    var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-    return `
-    <div class="mensagem-alarme">
-        <div class="informacao">
-            <div class="${grauDeAvisoCor}">&#12644;</div> 
-            <h3>${descricao} está em estado de ${grauDeAviso}!</h3>
-            <small>Temperatura capturada: ${temp}°C.</small>   
-        </div>
-        <div class="alarme-sino"></div>
-    </div>
-    `;
-}
-
-function atualizacaoPeriodica() {
-    JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-        obterdados(item.id)
-    });
-    setTimeout(atualizacaoPeriodica, 5000);
-}
+window.onload = function(){
+  exibirPergunta();
+  document.getElementById("next-button").style.display = "none";
+};

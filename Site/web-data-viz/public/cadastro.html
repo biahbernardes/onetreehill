@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="stylesheet" href="./style/cadastro.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>AquaTech | Cadastro</title>
+  <title>One Tree Hill | Cadastro</title>
 
   <script src="./js/sessao.js"></script>
 
-  <link rel="stylesheet" href="./css/cadastro.css" />
   <link rel="icon" href="./assets/icon/favicon2.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
@@ -37,7 +37,7 @@
           <a href="#trilha">Trilha sonora</a>
         </h5>
         <h5>
-          <a href="episodios.html">Login</a>
+          <a href="login.html">Login</a>
         </h5>
       </ul>
     </div>
@@ -147,6 +147,21 @@
         mensagem_erro.innerHTML = "As senhas não coincidem.";
         return false;
       }
+
+      if (senhaVar.length < 6) {
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = "A senha deve ter pelo menos 6 caracteres.";
+        return false;
+  }
+
+      const emailValido = emailVar.includes("@") &&
+      (emailVar.endsWith(".com") || emailVar.endsWith(".school") || emailVar.endsWith(".com.br"));
+
+      if (!emailValido) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML = "Informe um e-mail válido (.com, .school ou .com.br).";
+      return false;
+  }
 
       fetch("/usuarios/cadastrar", {
         method: "POST",
