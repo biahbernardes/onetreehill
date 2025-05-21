@@ -417,30 +417,26 @@ input {
 }
 .link {
   text-align: center;
-  margin-top: 2px;
+  margin-top: 15px;  
   display: flex;
-  justify-content: center; /* Garante que o conteúdo seja centralizado horizontalmente */
+  justify-content: center;
+  width: 100%;
 }
 
-.link p {
-  font-family: 'Montserrat';
-  color: black; /* Cor do texto */
-  text-decoration: none; /* Retira o sublinhado */
-  font-size: -5px; /* Tamanho do texto pequeno */
-  text-align: center; /* Garante que o texto dentro do parágrafo seja centralizado */
-  margin: 0; /* Retira qualquer margem padrão do <p> */
+.botao-cadastro {
+  background-color: #633657; 
+  color: white; 
+  font-size: 16px; 
+  font-weight: 600;
+  text-decoration: none; 
+  padding: 10px 20px; 
+  border-radius: 8px; 
+  transition: transform 0.2s, background-color 0.2s; 
 }
 
-.link a {
-  font-family: 'Montserrat';
-  color: #007bff; /* Cor do link */
-  text-decoration: none; /* Retira o sublinhado */
-  font-size: 7px; /* Tamanho do texto pequeno */
-  text-align: center; /* Garante que o texto dentro do link seja centralizado */
-}
-
-.link a:hover {
-  text-decoration: underline; /* Sublinha o link ao passar o mouse */
+.botao-cadastro:hover {
+  background-color: #532a4a; 
+  transform: scale(1.05); 
 }
 
 @keyframes bell {
