@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz - One Tree Hill</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style/quiz.css" />
+</head>
+
+<body>
+  <div class="container-pai">
+
+    <div class="sidebar">
+      <div class="profile">
+        <img src="./assets/account.png" alt="Perfil" />
+        <h1>Olá, <span id="b_usuario"></span>!</h1>
+      </div>
+
+      <a href="./episodios.html">Temporadas e Episódios</a>
+      <a href="./quiz.html">Quiz</a>
+      <a href="./dashboard.html">Visão Geral</a>
+
+      <a href="./login.html" class="logout-btn">
+        Sair
+        <img src="./assets/botao -sair.png" alt="Logout" class="logout-icon" />
+      </a>
+    </div>
+
+    <main class="main-quiz">
+      <div class="quiz-box">
+        <h1>One Tree Quiz</h1>
+        <div id="quiz">
+          <div id="question">Carregando pergunta...</div>
+          <div id="options"></div>
+          <button id="next-button">Próxima</button>
+        </div>
+        <div id="result-container" style="display: none;">
+          <h2>Confira na visão geral seus resultados 😊</h2>
+          <p id="score"></p>
+          <button onclick="tentarNovamente()">Tentar Novamente</button>
+        </div>
+      </div>
+    </main>
+  </div>
+<script src="./js/quiz.js"></script>
+</body>
+</html>
