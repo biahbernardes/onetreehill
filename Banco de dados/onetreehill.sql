@@ -1,4 +1,48 @@
-create database onetreehill;
+CREATE DATABASE onetreehill;
+USE onetreehill;
+
+CREATE TABLE usuario (
+  idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+  nome varchar(45) NOT NULL,
+  email varchar(100) NOT NULL UNIQUE,
+  personagemFavorito VARCHAR(50) NOT NULL,
+  senha VARCHAR(80) NOT NULL
+);
+
+CREATE TABLE quiz(
+idQuiz INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+acertos INT,
+perguntas INT DEFAULT 8,
+fkUsuario INT,
+FOREIGN KEY(fkUsuario) REFERENCES usuario(idUsuario)
+);
+
+INSERT INTO usuario (nome, email, personagemFavorito, senha) VALUES
+('Haley James', 'haley@onetreehill.com', 'Nathan Scott', 'tutor123'),
+('Mouth McFadden', 'mouth@onetreehill.com', 'Jimmy Edwards', 'comentarista'),
+('Rachel Gatina', 'rachel@onetreehill.com', 'Brooke Davis', 'cheerleader');
+
+SELECT * FROM usuario;
+
+INSERT INTO quiz (nome, acertos, fkUsuario) VALUES
+('Quiz Haley', 7, 1),         
+('Quiz Mouth', 6, 3),         
+('Quiz Rachel', 8, 2);       
+
+SELECT * FROM quiz;
+
+-- média de acertos por usuário 
+SELECT  u.nome, 
+AVG(q.acertos) AS media_acertos FROM usuario u
+JOIN quiz q ON u.idUsuario = q.fkUsuario
+GROUP BY u.idUsuario;
+    
+-- média todos os quizzes 
+SELECT AVG(acertos) AS media_geral FROM quiz;
+
+
+/*create database onetreehill;
 use onetreehill;
 
 create table usuario (
@@ -96,4 +140,4 @@ where a.reassistido = 1
 group by e.titulo
 order by total_reassistido desc;
 
-select * from usuario;
+select * from usuario;*/
