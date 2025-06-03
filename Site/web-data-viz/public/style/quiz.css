@@ -75,8 +75,8 @@ body {
   margin-left: 250px;
   flex: 1;
   padding: 30px;
-  background-color: #fefcf9;
-
+  /*background-color: #fefcf9;*/
+  background-image: url('../assets/episodios/');
   display: flex;
   justify-content: center;
   align-items: center;
