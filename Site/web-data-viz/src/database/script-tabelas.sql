@@ -40,14 +40,13 @@ INSERT INTO quiz (nome, acertos, fkUsuario) VALUES
 SELECT * FROM quiz;
 
 -- média de acertos por usuário 
-SELECT  u.nome, 
+SELECT u.nome, 
 AVG(q.acertos) AS media_acertos FROM usuario u
 JOIN quiz q ON u.idUsuario = q.fkUsuario
 GROUP BY u.idUsuario;
     
 -- média todos os quizzes 
 SELECT AVG(acertos) AS media_geral FROM quiz;
-
 
 
 

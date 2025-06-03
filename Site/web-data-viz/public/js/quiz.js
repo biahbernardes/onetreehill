@@ -49,55 +49,56 @@ let pontuacao = 0;
 
 function exibirPergunta() {
   const pergunta = perguntas[perguntaAtual];
-  const questionEl = document.getElementById("question");
-  const optionsEl = document.getElementById("options");
+  document.getElementById("question").innerHTML = pergunta.pergunta;
 
-  questionEl.textContent = pergunta.pergunta;
-  optionsEl.innerHTML = "";
-
-  pergunta.opcoes.forEach(opcao => {
-    const botao = document.createElement("button");
-    botao.textContent = opcao;
-    botao.onclick = () => verificarResposta(opcao, botao);
-    optionsEl.appendChild(botao);
-  });
+  let mensagem = "";
+  for (let i = 0; i < pergunta.opcoes.length; i++) {
+    mensagem += `<button onclick="verificarResposta('${pergunta.opcoes[i]}')">${pergunta.opcoes[i]}</button>`;
+  }
+  document.getElementById("options").innerHTML = mensagem;
 
   document.getElementById("next-button").style.display = "none";
 }
 
-function verificarResposta(resposta, botaoClicado) {
+function verificarResposta(respostaSelecionada) {
   const respostaCorreta = perguntas[perguntaAtual].resposta;
-  const botoes = document.querySelectorAll("#options button");
+  const botoes = document.getElementById("options").getElementsByTagName("button");
 
-  botoes.forEach(botao => {
-    botao.disabled = true;
-    if (botao.textContent === respostaCorreta) {
-      botao.classList.add("correto");
+  for (let i = 0; i < botoes.length; i++) {
+    const botao = botoes[i]; 
+    botao.disabled = true; 
+
+    if (botao.innerText === respostaCorreta) {
+      botao.style.backgroundColor = "green";
+      botao.style.color = "white"; 
     }
-  });
 
-  if (resposta !== respostaCorreta) {
-    botaoClicado.classList.add("errado");
-  } else {
-    pontuacao++;
+    if (botao.innerText === respostaSelecionada) {
+      if (respostaSelecionada !== respostaCorreta) {
+        botao.style.backgroundColor = "red"; 
+        botao.style.color = "white"; 
+      } else {
+        pontuacao++; 
+      }
+    }
   }
+
 
   document.getElementById("next-button").style.display = "block";
 }
 
-document.getElementById("next-button").addEventListener("click", () => {
+function proximaPergunta() {
   perguntaAtual++;
   if (perguntaAtual < perguntas.length) {
     exibirPergunta();
   } else {
     exibirResultado();
   }
-});
+}
 
 function exibirResultado() {
   document.getElementById("quiz").style.display = "none";
   document.getElementById("result-container").style.display = "block";
-  // document.getElementById("score").textContent = `Você acertou ${pontuacao} de ${perguntas.length} perguntas.`;
 
   const fkUsuario = sessionStorage.ID_USUARIO;
 
@@ -109,21 +110,17 @@ function exibirResultado() {
       fkUsuarioServer: fkUsuario
     }),
   })
-  .then(response => {
-    if (!response.ok) {
-      return response.text().then(texto => {
-        console.error("Erro na resposta do backend:", texto);
-      });
+  .then(res => {
+    if (!res.ok) {
+      res.text().then(texto => console.error("Erro no backend:", texto));
     } else {
-      console.log("Requisição bem-sucedida");
+      console.log("Pontuação enviada com sucesso");
     }
   })
-  .catch(erro => {
-    console.error("Erro na requisição:", erro);
-  });
+  .catch(erro => console.error("Erro na requisição:", erro));
 }
 
-function tentarNovamente(){
+function tentarNovamente() {
   perguntaAtual = 0;
   pontuacao = 0;
   document.getElementById("result-container").style.display = "none";
@@ -131,7 +128,8 @@ function tentarNovamente(){
   exibirPergunta();
 }
 
-window.onload = function(){
+window.onload = function () {
   exibirPergunta();
+  document.getElementById("next-button").onclick = proximaPergunta;
   document.getElementById("next-button").style.display = "none";
 };

@@ -315,6 +315,7 @@ body {
   border: #ED145B 3px solid;
   padding: 10px;
   margin-right: 10%;
+  display: block !important; 
 }
 
 .card_erro #mensagem_erro{
