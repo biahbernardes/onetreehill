@@ -28,19 +28,23 @@ const perguntas = [
     resposta: "Dan"
   },
   {
-    pergunta: "Qual mês tem 30 dias?",
-    opcoes: ["Janeiro", "Dezembro", "Junho", "Agosto"],
-    resposta: "Junho"
+    pergunta: "Quem é a melhor amiga de Peyton Sawyer e tem um relacionamento com Lucas Scott por um tempo?",
+    opcoes: ["Brooke Davis", "Haley James", "Rachel Gatina", "Mouth McFadden"],
+    resposta: "Brooke Davis"
   },
   {
-    pergunta: "Quantas horas tem em um dia?",
-    opcoes: ["30 horas", "38 horas", "48 horas", "24 horas"],
-    resposta: "24 horas"
+    pergunta: "Qual é o nome do time de basquete que Lucas Scott joga na faculdade?",
+    opcoes: ["Ravens", "Wildcats", "Hurricanes", "Tigers"],
+    resposta: "Ravens"
   },
   {
-    pergunta: "Qual destes números é ímpar?",
-    opcoes: ["Dez", "Doze", "Oito", "Onze"],
-    resposta: "Onze"
+    pergunta: "Qual frase de Peyton expressa a dificuldade dela com perdas?",
+    opcoes: [
+        "People always leave.",
+        "Love is fragile.",
+        "The world’s a mess.",
+        "People change."],
+    resposta: "People always leave."
   }
 ];
 
