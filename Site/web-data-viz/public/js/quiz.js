@@ -52,21 +52,30 @@ let perguntaAtual = 0;
 let pontuacao = 0;
 
 function exibirPergunta() {
-  const pergunta = perguntas[perguntaAtual];
-  document.getElementById("question").innerHTML = pergunta.pergunta;
 
-  let mensagem = "";
-  for (let i = 0; i < pergunta.opcoes.length; i++) {
+   const pergunta = perguntas[perguntaAtual];
+
+   const elementoPergunta = document.getElementById("question");
+   const containerOpcoes = document.getElementById("options");
+   const botaoProxima = document.getElementById("next-button");
+
+   elementoPergunta.innerHTML = pergunta.pergunta;
+
+   let mensagem = "";
+   for (let i = 0; i < pergunta.opcoes.length; i++) {
     mensagem += `<button onclick="verificarResposta('${pergunta.opcoes[i]}')">${pergunta.opcoes[i]}</button>`;
   }
-  document.getElementById("options").innerHTML = mensagem;
+  containerOpcoes.innerHTML = mensagem;
 
-  document.getElementById("next-button").style.display = "none";
+  botaoProxima.style.display = "none";
 }
 
 function verificarResposta(respostaSelecionada) {
+
   const respostaCorreta = perguntas[perguntaAtual].resposta;
-  const botoes = document.getElementById("options").getElementsByTagName("button");
+
+  //const botoes = document.getElementById("options").getElementsByTagName("button");
+  const botoes = document.querySelectorAll("#options button");
 
   for (let i = 0; i < botoes.length; i++) {
     const botao = botoes[i]; 
@@ -87,13 +96,15 @@ function verificarResposta(respostaSelecionada) {
     }
   }
 
-
-  document.getElementById("next-button").style.display = "block";
+  const botaoProxima = document.getElementById("next-button");
+  botaoProxima.style.display = "block";
 }
 
-function proximaPergunta() {
+function proximaPergunta(){
+
   perguntaAtual++;
-  if (perguntaAtual < perguntas.length) {
+
+  if (perguntaAtual < perguntas.length){
     exibirPergunta();
   } else {
     exibirResultado();
@@ -101,8 +112,12 @@ function proximaPergunta() {
 }
 
 function exibirResultado() {
-  document.getElementById("quiz").style.display = "none";
-  document.getElementById("result-container").style.display = "block";
+  
+  const quiz = document.getElementById("quiz");
+  const resultado = document.getElementById("result-container");
+
+  quiz.style.display = "none";
+  resultado.style.display = "block";
 
   const fkUsuario = sessionStorage.ID_USUARIO;
 
@@ -127,13 +142,19 @@ function exibirResultado() {
 function tentarNovamente() {
   perguntaAtual = 0;
   pontuacao = 0;
-  document.getElementById("result-container").style.display = "none";
-  document.getElementById("quiz").style.display = "block";
+
+  const resultado = document.getElementById("result-container");
+  const quiz = document.getElementById("quiz");
+
+  resultado.style.display = "none";
+  quiz.style.display = "block";
+
   exibirPergunta();
 }
 
 window.onload = function () {
   exibirPergunta();
-  document.getElementById("next-button").onclick = proximaPergunta;
-  document.getElementById("next-button").style.display = "none";
+   const botaoProxima = document.getElementById("next-button");
+   botaoProxima.onclick = proximaPergunta;
+   botaoProxima.style.display = "none";
 };

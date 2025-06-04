@@ -36,8 +36,11 @@ function carregarGrafico() {
       const percentualAcertos = ((somaTotalAcertos / (totalTentativas * 8)) * 100).toFixed();
       const percentualErros = ((somaTotalErros / (totalTentativas * 8)) * 100).toFixed();
 
-      document.getElementById("kpiAcertos").innerText = `${percentualAcertos}%`;
-      document.getElementById("kpiErros").innerText = `${percentualErros}%`;
+      const kpiAcertos = document.getElementById("kpiAcertos");
+      const kpiErros = document.getElementById("kpiErros");
+
+      kpiAcertos.textContent = `${percentualAcertos}%`;
+      kpiErros.textContent = `${percentualErros}%`;
 
       function atualizarDataHora() {
         const agora = new Date();

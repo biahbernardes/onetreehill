@@ -14,7 +14,6 @@ body {
   --tamanho-login: calc(150vh - var(--tamanho-header) - var(--tamanho-footer) - 2px);
 }
 
-/* Container genérico */
 .container {
   display: flex;
   width: 80%;
