@@ -9,7 +9,7 @@ function carregarGrafico() {
     .then(res => res.json())
     .then(pontuacoesUsuario => {
       if (pontuacoesUsuario.length === 0) {
-        alert(`O usuário ${idUsuario} não possui registros nesse quiz.`);
+        alert(`Você ainda não possui registros nesse quiz, responda as perguntas!`);
         if (chart) chart.destroy();
         return;
       }
