@@ -152,9 +152,11 @@ function tentarNovamente() {
   exibirPergunta();
 }
 
-window.onload = function () {
+function inicializarQuiz() {
   exibirPergunta();
-   const botaoProxima = document.getElementById("next-button");
-   botaoProxima.onclick = proximaPergunta;
-   botaoProxima.style.display = "none";
-};
+  const botaoProxima = document.getElementById("next-button");
+  botaoProxima.onclick = proximaPergunta;
+  botaoProxima.style.display = "none";
+}
+
+window.onload = inicializarQuiz;

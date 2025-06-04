@@ -76,10 +76,13 @@ body {
   flex: 1;
   padding: 30px;
   /*background-color: #fefcf9;*/
-  background-image: url('../assets/geral.png');
+  background-image: url('../assets/tentando.jpg');
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .quiz-box {
@@ -90,6 +93,11 @@ body {
   max-width: 600px;
   width: 100%;
   text-align: center;
+  /* pensando o que acho */
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px 40px;
 }
 
 .quiz-box h1 {
